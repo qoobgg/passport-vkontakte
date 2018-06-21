@@ -18,7 +18,7 @@ interface VerifyFunction {
     (error: any, user?: any, msg?: VerifyOptions): void;
 }
 
-interface IOAuth2StrategyOption {
+interface StrategyOptions {
     clientID: string;
     clientSecret: string;
     callbackURL: string;
@@ -33,13 +33,13 @@ interface IOAuth2StrategyOption {
     display?: string;
 }
 
-interface IOAuth2StrategyOptionWithRequest extends IOAuth2StrategyOption {
-    passReqToCallback: boolean;
+interface StrategyOptionsWithRequest extends StrategyOptions {
+    passReqToCallback: true;
 }
 
-declare class OAuth2Strategy implements passport.Strategy {
+declare class Strategy implements passport.Strategy {
     constructor(
-        options: IOAuth2StrategyOption,
+        options: StrategyOptions,
         verify: (
             accessToken: string,
             refreshToken: string,
@@ -49,7 +49,7 @@ declare class OAuth2Strategy implements passport.Strategy {
         ) => void
     );
     constructor(
-        options: IOAuth2StrategyOptionWithRequest,
+        options: StrategyOptionsWithRequest,
         verify: (
             req: express.Request,
             accessToken: string,
